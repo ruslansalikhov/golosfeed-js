@@ -1,6 +1,6 @@
 /**
  *
- * Node.JS pricefeed script for steem
+ * Node.JS pricefeed script for GOLOS
  * Created by @Someguy213
  * https://github.com/someguy123
  * Released under GNU GPL 3.0
@@ -10,12 +10,12 @@
 var config = require('./config.json');
 var exchange = require('./lib/exchange');
 
-if(!('node' in config)) { config['node'] = 'wss://node.steem.ws'; }
+if(!('node' in config)) { config['node'] = 'ws://golos.steem.ws'; }
 if(!('peg' in config)) { config['peg'] = true; }
 if(!('peg_multi' in config)) { config['peg_multi'] = 0.88; }
 
 var options = {url: config['node']}
-var { TransactionBuilder, Login } = require('steemjs-lib');
+var { TransactionBuilder, Login } = require('golosjs-lib');
 var {Client} = require('steem-rpc');
 var Api = Client.get(options, true);
 var request = require('request');
@@ -65,38 +65,16 @@ function loginAccount(username, wif, roles, callback) {
 }
 
 var get_price = function(callback) {
-    exchange.get_pair('steem','usd', function(price) {
+    exchange.get_pair('golos','xau', function(price) {
+        // console.log('price is', price);
         callback(false, parseFloat(price));
     });
 }
 
-// function get_price(callback) {
-//     request('https://value.steem.network/exdata.json', function(error,response,body) {
-//         if(error || response.statusCode != 200) {
-//             return callback(true,null);
-//         }
-//         var prices = JSON.parse(body),
-//             price = 0;
-
-//         if('usd_steem' in prices) {
-//             var price = 1 / prices['usd_steem'];
-//         }
-//         if('steem_usd' in prices) {
-//             var price = prices['steem_usd'];
-//         }
-//         if(price == 0) {
-//             return callback(true,null);
-//         }
-//         return callback(false, parseFloat(price));
-//     })
-//     //callback(false, price);
-//     //callback(true, null);
-// }
-
 function publish_feed(rate, account_data) {
     try {
         var tr = new TransactionBuilder();
-        var ex_data = rate.toFixed(3) + " SBD";
+        var ex_data = rate.toFixed(3) + " GBG";
         if(config.peg) {
             var pcnt = ((1 - config['peg_multi']) * 100).toFixed(2)
             log('Pegging is enabled. Reducing price by '+pcnt+'% (set config.peg to false to disable)');
@@ -105,7 +83,7 @@ function publish_feed(rate, account_data) {
         }
         var feed_data = {
             publisher: account_data.name,
-            exchange_rate: {base: ex_data, quote: quote.toFixed(3) + " STEEM"}
+            exchange_rate: {base: ex_data, quote: quote.toFixed(3) + " GOLOS"}
         }
         tr.add_type_operation("feed_publish", feed_data);
         tr.process_transaction(account_data, null, true)
@@ -121,8 +99,8 @@ function main(account_data) {
         if(err) {
             return console.error('error loading prices, will retry later');
         }
-        log('STEEM/USD is ', price.toFixed(3));
-        publish_feed(price, account_data);
+        log('GOLOS/XAU(mg) is ', price.toFixed(3));
+        // publish_feed(price, account_data);
     });
 }
 

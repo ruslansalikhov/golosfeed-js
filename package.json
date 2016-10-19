@@ -1,7 +1,7 @@
 {
-  "name": "steemfeed-js",
+  "name": "golosfeed-js",
   "version": "1.0.0",
-  "description": "Steem Price Feed in JS using SteemValue API",
+  "description": "GOLOS Price Feed in JS",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,8 @@
   "author": "Chris <info@someguy123.com> (Someguy123)",
   "license": "GPL-3.0",
   "dependencies": {
-    "request": "^2.74.0",
-    "steemjs-lib": "^0.3.6"
+    "cheerio": "^0.22.0",
+    "golosjs-lib": "^0.3.7-1",
+    "request": "^2.74.0"
   }
 }
