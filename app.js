@@ -75,6 +75,7 @@ function publish_feed(rate, account_data) {
     try {
         var tr = new TransactionBuilder();
         var ex_data = rate.toFixed(3) + " GBG";
+        var quote = 1;
         if(config.peg) {
             var pcnt = ((1 - config['peg_multi']) * 100).toFixed(2)
             log('Pegging is enabled. Reducing price by '+pcnt+'% (set config.peg to false to disable)');
@@ -100,7 +101,7 @@ function main(account_data) {
             return console.error('error loading prices, will retry later');
         }
         log('GOLOS/XAU(mg) is ', price.toFixed(3));
-        // publish_feed(price, account_data);
+        publish_feed(price, account_data);
     });
 }
 
