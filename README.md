@@ -2,7 +2,7 @@ Golos Feed JS
 ============
 
 This is a GOLOS Price Feed for witnesses on the [Golos Network](https://golos.io). It's
-written in Node.JS and uses SVK's [GolosJS-Lib](https://github.com/svk31/golosjs-lib).
+written in Node.JS and uses Someguy123's (fork of SVK's) [GolosJS-Lib](https://github.com/someguy123/golosjs-lib).
 
 Installation
 ========
