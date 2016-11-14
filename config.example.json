@@ -1,5 +1,6 @@
 {
     "name": "your golos name",
     "wif": "your active private key",
-    "interval": 60
+    "interval": 60,
+    "peg": false
 }
