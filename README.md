@@ -22,7 +22,7 @@ I recommend using Docker, however you can also use a locally installed copy of N
 
 ```
 docker build -t golosfeed-js .
-docker run -it --rm --name feed golosfeed-js
+docker run -it --rm --name golosfeed golosfeed-js
 
 # Check the status with docker logs
 docker logs feed
