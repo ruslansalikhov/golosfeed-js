@@ -19,10 +19,13 @@ var { TransactionBuilder, Login } = require('golosjs-lib');
 var {Client} = require('steem-rpc');
 var Api = Client.get(options, true);
 var request = require('request');
+require('./lib/helpers');
 // Needs to be global scope to access elsewhere
 var user = new Login();
 
 var shouldPublish = process.argv.length > 2 && process.argv[2] == "publishnow";
+
+console.log('...');
 
 function loginAccount(username, wif, roles, callback) {
     user.setRoles(roles);
