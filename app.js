@@ -24,6 +24,7 @@ require('./lib/helpers');
 var user = new Login();
 
 var shouldPublish = process.argv.length > 2 && process.argv[2] == "publishnow";
+var testrate = process.argv.length > 2 && process.argv[2] == "test";
 
 console.log('...');
 
@@ -78,6 +79,10 @@ function publish_feed(rate, account_data) {
     try {
         var tr = new TransactionBuilder();
         var ex_data = rate.toFixed(3) + " GBG";
+        if(testrate) {
+            log('Amount is: ', ex_data);
+            return;
+        }
         var quote = 1;
         if(config.peg) {
             var pcnt = ((1 - config['peg_multi']) * 100).toFixed(2)
@@ -115,7 +120,7 @@ loginAccount(config.name, config.wif, ['active'], function(err,account_data) {
     }
     log('Successfully logged into user', account_data.name);
     console.log();
-    if(shouldPublish) {
+    if(shouldPublish || testrate) {
         log('Publishing immediately, then every %s minute(s)',config.interval);
         main(account_data);
     } else {
