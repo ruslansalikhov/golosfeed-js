@@ -10,9 +10,9 @@
 var config = require('./config.json');
 var exchange = require('./lib/exchange');
 
-if(!('node' in config)) { config['node'] = 'wss://node.golos.ws'; }
-if(!('peg' in config)) { config['peg'] = true; }
-if(!('peg_multi' in config)) { config['peg_multi'] = 0.88; }
+if(!('node' in config)) { config['node'] = 'wss://ws.golos.io'; }
+if(!('peg' in config)) { config['peg'] = false; }
+if(!('peg_multi' in config)) { config['peg_multi'] = 1; }
 
 var options = {url: config['node']}
 var { TransactionBuilder, Login } = require('golosjs-lib');
