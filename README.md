@@ -7,29 +7,23 @@ written in Node.JS and uses Someguy123's (fork of SVK's) [GolosJS-Lib](https://g
 Installation
 ========
 
+For the script node.js v7 or above required
+
+
 First, download the git repository, then edit `config.json` as needed. The interval is in minutes.
 
 ```
-git clone https://github.com/Someguy123/golosfeed-js.git
+git clone https://github.com/gropox/golosfeed-js.git
 cd golosfeed-js
 cp config.example.json config.json
 nano config.json
-```
-
-I recommend using Docker, however you can also use a locally installed copy of Node v6.
-
-**Starting Via Docker**
-
-```
-docker build -t golosfeed-js .
-docker run -it --rm --name golosfeed golosfeed-js
-
-# Check the status with docker logs
-docker logs feed
+npm install
 ```
 
 **Starting Via NodeJS (assuming you have v6 installed)**
 ```
-npm install
-npm start
+node app.js
 ```
+
+
+This script originally written by someguy123 and adopted for using golos-js library. Docker is not supported, but can be used. Probably.
